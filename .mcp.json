@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "api-security-qa": {
+      "command": "uvx",
+      "args": [
+        "k11-api-security-qa-mcp"
+      ],
+      "env": {
+        "QA_MCP_ROOT": "${CLAUDE_PROJECT_DIR}"
+      }
+    }
+  }
+}

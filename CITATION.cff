@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "k11 API Security QA MCP Server"
+abstract: "MCP server and CI tool for API security testing as release evidence: OWASP API Security Top 10 tests generated from an OpenAPI specification and run as test identities (broken object level authorization, broken authentication, mass assignment, sensitive data exposure, function level authorization, misconfiguration), with control requests that make results meaningful, plus SARIF scanner results judged against a baseline and expiring risk acceptances."
+authors:
+  - family-names: "Jadhav"
+    given-names: "Kavita"
+    orcid: "https://orcid.org/0009-0009-8507-4976"
+    affiliation: "K11 Software Solutions"
+repository-code: "https://github.com/K11-Software-Solutions/k11techlab-api-security-qa-mcp"
+url: "https://github.com/K11-Software-Solutions/k11techlab-api-security-qa-mcp"
+license: MIT
+keywords:
+  - "API security"
+  - "OWASP API Security Top 10"
+  - "BOLA"
+  - "security testing"
+  - "SARIF"
+  - "OpenAPI"
+  - "model context protocol"
+  - "quality engineering"
+references:
+  - type: article
+    title: "Autonomous CI/CD Quality Assurance Using LangGraph Multi-Agent Orchestration and Risk-Proportionate Human-in-the-Loop Control"
+    authors:
+      - family-names: "Jadhav"
+        given-names: "Kavita"
+        orcid: "https://orcid.org/0009-0009-8507-4976"
+    journal: "International Journal of Engineering and Computer Science"
+    year: 2026
+    doi: "10.18535/ijecs/v15i06.5563"

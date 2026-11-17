@@ -1,0 +1,10 @@
+accepted:
+  - rule: python.lang.security.audit.md5-used
+    path: app/legacy/checksum.py
+    owner: "@security-lead"
+    reason: legacy file checksum, not used for passwords; replaced in Q1
+    expires: 2099-12-31
+  - rule: python.flask.security.audit.debug-enabled
+    owner: "@platform-team"
+    reason: debug only in the local profile
+    expires: 2026-01-31

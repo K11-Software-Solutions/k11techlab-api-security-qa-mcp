@@ -1,0 +1,22 @@
+{
+  "name": "api-security-qa",
+  "version": "0.1.0",
+  "description": "API security testing from Claude Code: OWASP API Security Top 10 tests generated from your OpenAPI spec (cross-user access, broken auth, mass assignment, secrets in responses, admin functions, CORS) and scanner SARIF judged against a baseline and expiring risk acceptances.",
+  "author": {
+    "name": "Kavita A. Jadhav",
+    "url": "https://k11softwaresolutions.com"
+  },
+  "homepage": "https://github.com/K11-Software-Solutions/k11techlab-api-security-qa-mcp",
+  "repository": "https://github.com/K11-Software-Solutions/k11techlab-api-security-qa-mcp",
+  "license": "MIT",
+  "keywords": [
+    "api-security",
+    "owasp",
+    "bola",
+    "idor",
+    "sarif",
+    "security-testing",
+    "qa",
+    "mcp"
+  ]
+}

@@ -1,0 +1,11 @@
+spec: openapi.yaml
+default_environment: local
+environments:
+  local:
+    base_url: "${ENV:BANK_URL}"
+  prod:
+    base_url: "${ENV:BANK_URL}"      # same demo server, named like production: security tests are refused
+auth:
+  alice: { type: bearer, token: "${ENV:ALICE_TOKEN}" }
+  bob:   { type: bearer, token: "${ENV:BOB_TOKEN}" }
+  admin: { type: bearer, token: "${ENV:ADMIN_TOKEN}" }

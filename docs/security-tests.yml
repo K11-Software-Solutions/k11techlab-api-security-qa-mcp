@@ -1,0 +1,38 @@
+# Copy to .github/workflows/ in your API's repo. Runs the scanners you already use, then the OWASP API
+# checks against the test environment, and fails the pull request on new critical/high findings.
+name: API security
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install k11-api-security-qa-mcp semgrep
+      - name: Scanners (any that write SARIF)
+        run: |
+          mkdir -p security-reports
+          semgrep scan --config p/default --sarif -o security-reports/semgrep.sarif || true
+      - name: Start the API under test
+        run: echo "docker compose up -d && ./scripts/wait-for-api.sh"
+      - name: Save the scanner baseline (main)
+        if: github.ref == 'refs/heads/main'
+        run: k11-api-security-qa-mcp baseline
+      - name: Security tests
+        if: github.event_name == 'pull_request'
+        run: k11-api-security-qa-mcp run --env ci
+        env:
+          API_URL: http://localhost:8080
+          ALICE_TOKEN: ${{ secrets.TEST_ALICE_TOKEN }}
+          BOB_TOKEN: ${{ secrets.TEST_BOB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-report
+          path: .qa-mcp/security-report/

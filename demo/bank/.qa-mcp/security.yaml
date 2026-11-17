@@ -1,0 +1,14 @@
+# k11 API Security QA demo: three test users from api-test.yaml
+identities:
+  alice: { auth: alice }
+  bob:   { auth: bob }
+  admin: { auth: admin }
+resources:
+  "/accounts/{id}":
+    create: { call: POST /accounts, body: { name: QA account }, save: "$.id" }
+  "/admin/users/{id}":
+    id: u-does-not-exist          # never point a destructive admin test at a real user
+admin_paths: ["/admin/**"]
+checks: [auth, bola, bfla, mass_assignment, data_exposure, headers, errors, rate_limit]
+rate_limit: { endpoint: "GET /accounts/{id}", requests: 20 }
+sarif: ["security-reports/*.sarif"]

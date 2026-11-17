@@ -1,0 +1,15 @@
+{
+  "name": "k11-api-security-qa",
+  "description": "k11 API Security QA: OWASP API Top 10 tests from your spec and scanner results judged for release decisions.",
+  "owner": {
+    "name": "K11 Software Solutions",
+    "url": "https://k11softwaresolutions.com"
+  },
+  "plugins": [
+    {
+      "name": "api-security-qa",
+      "source": "./",
+      "description": "OWASP API Top 10 tests from your spec, plus scanner results judged against a baseline."
+    }
+  ]
+}

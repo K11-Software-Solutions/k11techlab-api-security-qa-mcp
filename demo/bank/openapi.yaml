@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: K11 Bank (demo with deliberate flaws)
+  version: 1.0.0
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      security: []
+      responses:
+        '200': { description: OK }
+  /users:
+    post:
+      summary: Sign up
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, name, password]
+              properties:
+                email: { type: string, format: email }
+                name: { type: string }
+                password: { type: string }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PublicUser' }
+  /users/{id}:
+    delete:
+      summary: Close my own user account
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '204': { description: Deleted }
+        '401': { description: Unauthorized }
+        '403': { description: Forbidden }
+  /users/me:
+    get:
+      summary: My profile
+      responses:
+        '200':
+          description: Me
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PublicUser' }
+        '401': { description: Unauthorized }
+  /reports:
+    get:
+      summary: Bank-wide report
+      responses:
+        '200': { description: Report }
+        '401': { description: Unauthorized }
+  /accounts:
+    post:
+      summary: Open an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, example: QA account }
+      responses:
+        '201':
+          description: Opened
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Account' }
+        '401': { description: Unauthorized }
+  /accounts/{id}:
+    parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+    get:
+      summary: An account I own
+      responses:
+        '200':
+          description: Account
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Account' }
+        '401': { description: Unauthorized }
+        '404': { description: Not found }
+    patch:
+      summary: Rename an account I own
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, example: Renamed }
+      responses:
+        '200':
+          description: Account
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Account' }
+        '404': { description: Not found }
+    delete:
+      summary: Close an account I own
+      responses:
+        '204': { description: Closed }
+        '404': { description: Not found }
+  /admin/stats:
+    get:
+      tags: [admin]
+      responses:
+        '200': { description: Stats }
+        '403': { description: Forbidden }
+  /admin/users/{id}:
+    delete:
+      tags: [admin]
+      summary: Delete any user (admins only)
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '204': { description: Deleted }
+        '403': { description: Forbidden }
+        '404': { description: Not found }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+  schemas:
+    PublicUser:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string }
+        name: { type: string }
+        role: { type: string }
+    Account:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        owner: { type: string }
+        balance: { type: number }
