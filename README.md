@@ -46,6 +46,8 @@ Started with `--secure`, the same bank passes all 30 API tests. Each finding car
 
 ## Configure
 
+> All K11 QA tools keep their settings, baselines and reports in `.qa-mcp/`. [What each file is for, and what to commit](https://github.com/K11-Software-Solutions/k11techlab-release-gate-mcp/blob/main/docs/qa-mcp-folder.md).
+
 Environments and auth profiles come from `.qa-mcp/api-test.yaml` (shared with [k11 API Functional QA](https://github.com/K11-Software-Solutions/k11techlab-api-functional-qa-mcp)). Security settings live in `.qa-mcp/security.yaml`:
 
 ```yaml
